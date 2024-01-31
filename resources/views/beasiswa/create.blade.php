@@ -35,7 +35,7 @@
             <div>
                 <label for="nomor_hp" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Nomor
                     HP</label>
-                <input type="number" name="nomor_hp" id="nomor_hp"
+                <input type="text" name="nomor_hp" id="nomor_hp"
                     class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
                     placeholder="" required>
             </div>
@@ -61,7 +61,7 @@
 
             <div>
                 <label for="ipk" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">IPK</label>
-                <input disabled type="text" name="ipk" id="ipk" value="{{ old('ipk', $defaultIPK) }}"
+                <input readonly type="text" name="ipk" id="ipk" value="{{ old('ipk', $defaultIPK) }}"
                     class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
                     placeholder="" required>
             </div>
@@ -134,7 +134,7 @@
 
 <script>
     document.getElementById('beasiswaForm').addEventListener('submit', function(e) {
-        e.preventDefault(); // Menghentikan submission form default
+        e.preventDefault(); 
     
         Swal.fire({
             title: 'Apakah Anda yakin?',

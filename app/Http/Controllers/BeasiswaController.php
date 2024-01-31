@@ -16,6 +16,7 @@ class BeasiswaController extends Controller
     public function index()
     {
         //memanggil view index dari folder beasiswa
+        // variabel pendaftaran berisi data dari model beasiswa dengan paginate 5(isi data 5)
         return view('beasiswa.index', [
             'pendaftaran' => beasiswa::latest()->paginate(5),
         ]);
@@ -28,7 +29,9 @@ class BeasiswaController extends Controller
      */
     public function create()
     {
+        //memanggil ipk dari config(env)
         $defaultIPK = config('beasiswa.default_ipk');
+        // menampilkan view create dengan membawa data ipk
         return view('beasiswa.create', compact('defaultIPK'));
     }
 
@@ -40,6 +43,7 @@ class BeasiswaController extends Controller
      */
     public function store(Request $request)
     {
+        //validasi diambil dari request input dari form
         $validateData = $request->validate([
             'nama' => 'required',
             'email' => 'required',
@@ -50,14 +54,16 @@ class BeasiswaController extends Controller
             'file_input' => 'required',
 
         ]);
+
+        $validateData['status'] = $validateData['status'] ?? 'Belum Diverifikasi';
+        // memeriksa apakah ada file yang diunggah dengan nama input file_input
         if ($request->file('file_input')) {
             $validateData['file_input'] = $request->file('file_input')->store('file', 'public');
         }
 
 
 
-
-
+        // menyimpan data ke database 
         beasiswa::create($validateData);
         return redirect('hasil')->with('success', 'berhasil daftar');
     }
